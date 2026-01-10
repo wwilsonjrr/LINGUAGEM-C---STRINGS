@@ -1,0 +1,24 @@
+/*
+1. Faça um programa que então leia uma string e a imprima.
+
+fgets(destino, tamanho, origem);
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão para funções de entrada e saída (printf, scanf)
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+int main()  // Função principal do programa
+{
+    char texto[100];  // Declara um vetor de caracteres (string) com espaço para até 99 caracteres + '\0'
+
+    // Solicita ao usuário que digite uma string
+    printf("Digite uma frase ou palavra: ");  // Exibe mensagem na tela
+    fgets(texto, sizeof(texto), stdin);       // Lê uma linha de texto do teclado (inclusive espaços)
+
+    // Exibe a string digitada pelo usuário
+    printf("\nVoce digitou: %s", texto);  // Mostra na tela o texto armazenado no vetor
+
+    system("pause");  // Pausa o programa para visualizar o resultado (usado em Windows)
+    return 0;         // Encerra o programa com sucesso
+}
