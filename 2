@@ -1,0 +1,32 @@
+/*
+2. Crie um programa que calcula o comprimento de uma string
+   (não use a função strlen).
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+int main()  // Função principal do programa
+{
+    char texto[100];   // Declara um vetor de caracteres (string) com 100 posições
+    int i = 0;         // Variável contadora que armazenará o tamanho da string
+
+    // Solicita ao usuário que digite uma string
+    printf("Digite uma palavra ou frase: ");
+    fgets(texto, sizeof(texto), stdin);  // Lê uma linha de texto, incluindo espaços
+
+    // Laço para contar os caracteres até encontrar o '\0'
+    while (texto[i] != '\0')  // Enquanto o caractere atual não for o terminador '\0'
+    {
+        i++;  // Incrementa o contador a cada caractere válido
+    }
+
+    // Subtrai 1 do resultado porque fgets() armazena o caractere '\n' antes do '\0'
+    int tamanho = i - 1;
+
+    // Exibe o resultado final
+    printf("\nO comprimento da string eh: %d caracteres.\n", tamanho);
+
+    system("pause");  // Mantém o terminal aberto (em Windows)
+    return 0;         // Finaliza o programa
+}
