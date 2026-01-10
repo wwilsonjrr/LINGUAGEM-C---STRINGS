@@ -1,0 +1,30 @@
+/*
+4. Faça um programa que leia um nome e imprima as 4 primeiras letras do nome.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída (printf, fgets)
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+int main()  // Função principal
+{
+    char nome[50];  // Declara um vetor de caracteres (string) com espaço para até 49 letras + '\0'
+    int i;          // Variável de controle do laço
+
+    // Solicita o nome do usuário
+    printf("Digite um nome: ");
+    fgets(nome, sizeof(nome), stdin);  // Lê o nome digitado (inclui espaços e '\n')
+
+    // Exibe as 4 primeiras letras
+    printf("\nAs 4 primeiras letras do nome sao: ");
+
+    // Laço para imprimir apenas os 4 primeiros caracteres
+    for (i = 0; i < 4; i++)  // Executa 4 vezes: i = 0, 1, 2, 3
+    {
+        printf("%c", nome[i]);  // Exibe o caractere na posição i
+    }
+
+    printf("\n");  // Pula uma linha após a exibição
+
+    system("pause");  // Mantém o programa aberto (em Windows)
+    return 0;         // Finaliza o programa com sucesso
+}
