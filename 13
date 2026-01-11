@@ -1,0 +1,36 @@
+/*
+13. Ler uma frase e contar quantos caracteres são espaços em brancos.
+    Lembre-se que uma frase é um conjunto de caracteres (vetor).
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída (printf, fgets)
+#include <stdlib.h>  // Biblioteca padrão (usada para system("pause"))
+
+int main(void)  // Função principal
+{
+    char frase[200];  // Vetor de caracteres (string) para armazenar a frase
+    int i = 0;        // Variável para percorrer a string
+    int espacos = 0;  // Contador para armazenar o número de espaços em branco
+
+    // Solicita que o usuário digite uma frase
+    printf("Digite uma frase: ");
+    fgets(frase, sizeof(frase), stdin);  // Lê a frase completa (incluindo espaços)
+
+    // Percorre todos os caracteres da frase até encontrar o fim da string ('\0')
+    while (frase[i] != '\0')
+    {
+        // Se o caractere atual for um espaço (' '), incrementa o contador
+        if (frase[i] == ' ')
+        {
+            espacos++;  // Soma +1 ao número de espaços encontrados
+        }
+
+        i++;  // Avança para o próximo caractere
+    }
+
+    // Exibe o total de espaços em branco encontrados na frase
+    printf("\nA frase digitada possui %d espacos em branco.\n", espacos);
+
+    system("pause");  // Mantém o console aberto até o usuário pressionar uma tecla
+    return 0;         // Finaliza o programa corretamente
+}
