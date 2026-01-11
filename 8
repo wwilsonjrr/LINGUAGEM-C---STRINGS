@@ -1,0 +1,34 @@
+/*
+8. Faça um programa que conte o número de '1's que aparecem em uma string.
+   Exemplo: "0011001" → 3
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+int main()  // Função principal
+{
+    char str[50];     // Declara a string com até 49 caracteres + '\0'
+    int i = 0;        // Variável para percorrer a string
+    int contador = 0; // Contador de quantos '1' aparecem
+
+    // Solicita que o usuário digite a string
+    printf("Digite uma string contendo 0s e 1s: ");
+    fgets(str, sizeof(str), stdin);  // Lê a string (permite espaços e inclui '\n')
+
+    // Laço para percorrer cada caractere da string
+    while (str[i] != '\0')  // Enquanto não chegar ao fim da string
+    {
+        if (str[i] == '1')  // Se o caractere atual for '1'
+        {
+            contador++;     // Incrementa o contador
+        }
+        i++;  // Avança para o próximo caractere
+    }
+
+    // Exibe o resultado final
+    printf("\nA string contem %d ocorrencias do caractere '1'.\n", contador);
+
+    system("pause");  // Mantém o console aberto até o usuário apertar uma tecla
+    return 0;         // Indica que o programa terminou corretamente
+}
