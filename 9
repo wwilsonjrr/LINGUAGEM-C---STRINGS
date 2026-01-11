@@ -1,0 +1,33 @@
+/*
+9. Escreva um programa que substitui as ocorrências de um caractere '0'
+   em uma string por outro caractere '1'.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+int main()  // Função principal
+{
+    char str[50];  // Cria a string com até 49 caracteres + '\0'
+    int i = 0;     // Índice para percorrer os caracteres da string
+
+    // Solicita a entrada da string
+    printf("Digite uma string contendo 0s e 1s: ");
+    fgets(str, sizeof(str), stdin);  // Lê a string digitada (aceita espaços)
+
+    // Percorre a string até o final ('\0' indica o fim)
+    while (str[i] != '\0')
+    {
+        if (str[i] == '0')   // Se encontrar o caractere '0'
+        {
+            str[i] = '1';    // Substitui '0' por '1'
+        }
+        i++;  // Avança para o próximo caractere
+    }
+
+    // Exibe o resultado final após as substituições
+    printf("\nString modificada: %s\n", str);
+
+    system("pause");  // Mantém a tela aberta até pressionar uma tecla
+    return 0;         // Encerra o programa corretamente
+}
