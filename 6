@@ -1,0 +1,41 @@
+/*
+6. Ler nome, sexo e idade.
+   Se o sexo for feminino e a idade menor que 25, imprime o nome da pessoa
+   e a palavra "ACEITA". Caso contrário, imprime "NÃO ACEITA".
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+#include <string.h>  // Biblioteca para manipulação de strings (strcmp, etc.)
+
+int main()  // Função principal
+{
+    char nome[50];   // String para armazenar o nome
+    char sexo;       // Variável do tipo char para armazenar o sexo (M/F)
+    int idade;       // Variável inteira para armazenar a idade
+
+    // Solicita o nome ao usuário
+    printf("Digite o nome: ");
+    fgets(nome, sizeof(nome), stdin);  // Lê o nome digitado (aceita espaços)
+
+    // Solicita o sexo ao usuário
+    printf("Digite o sexo (M/F): ");
+    scanf(" %c", &sexo);  // Lê um único caractere (note o espaço antes do %c para ignorar o ENTER)
+
+    // Solicita a idade ao usuário
+    printf("Digite a idade: ");
+    scanf("%d", &idade);  // Lê a idade (número inteiro)
+
+    // Verifica se o sexo é feminino ('F' ou 'f') e idade menor que 25
+    if ((sexo == 'F' || sexo == 'f') && idade < 25)
+    {
+        printf("\n%s\nACEITA\n", nome);  // Mostra o nome e a palavra ACEITA
+    }
+    else
+    {
+        printf("\nNAO ACEITA\n");  // Caso contrário, mostra NÃO ACEITA
+    }
+
+    system("pause");  // Mantém o programa aberto (em Windows)
+    return 0;         // Finaliza o programa com sucesso
+}
