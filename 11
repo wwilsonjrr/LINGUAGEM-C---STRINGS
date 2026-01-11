@@ -1,0 +1,34 @@
+/*
+11. Faça um programa que receba do usuário uma string.
+    O programa imprime a string sem suas vogais.
+*/
+
+#include <stdio.h>    // Inclui funções de entrada/saída (printf, fgets)
+#include <stdlib.h>   // Inclui utilitários gerais (usado aqui para system("pause"))
+
+int main(void)        // Função principal; ponto de entrada do programa
+{
+    char str[100];    // Declara um vetor de 100 chars para armazenar a string (99 + '\0')
+    int i = 0;        // Índice para percorrer, caractere a caractere, a string
+
+    printf("Digite uma frase ou palavra: ");  // Pede a entrada ao usuário
+    fgets(str, sizeof(str), stdin);           // Lê até 99 chars (ou até '\n'); garante terminação com '\0'
+
+    printf("\nString sem vogais: ");          // Título da saída
+
+    while (str[i] != '\0') // Laço percorre até encontrar o terminador de string '\0'
+    {
+        // Testa se o caractere atual NÃO é vogal (a,e,i,o,u maiúsculas/minúsculas) e NÃO é a quebra de linha
+        if (str[i] != 'a' && str[i] != 'e' && str[i] != 'i' && str[i] != 'o' && str[i] != 'u' &&  // vogais minúsculas
+            str[i] != 'A' && str[i] != 'E' && str[i] != 'I' && str[i] != 'O' && str[i] != 'U' &&  // vogais maiúsculas
+            str[i] != '\n') // evita imprimir o '\n' que fgets pode armazenar
+        {
+            printf("%c", str[i]);             // Imprime o caractere caso não seja vogal
+        }
+        i++;                                  // Avança para o próximo caractere da string
+    }
+
+    printf("\n");                             // Quebra de linha para finalizar a saída
+    system("pause");                          // Mantém a janela aberta no Windows até uma tecla ser pressionada
+    return 0;                                  // Retorna 0 indicando término bem-sucedido
+}
