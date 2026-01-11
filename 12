@@ -1,0 +1,46 @@
+/*
+12. Faça um programa que receba uma palavra e calcule quantas vogais (a, e, i, o, u)
+    possui essa palavra. Em seguida, o usuário entra com um caractere (vogal ou consoante)
+    e o programa substitui todas as vogais da palavra por esse caractere.
+*/
+
+#include <stdio.h>    // Inclui funções de entrada/saída (printf, scanf, fgets)
+#include <stdlib.h>   // Inclui funções padrão como system("pause")
+
+int main()  // Função principal do programa
+{
+    char palavra[100];  // Vetor para armazenar a palavra (até 99 caracteres + '\0')
+    char substituto;    // Caractere que substituirá as vogais
+    int i = 0;          // Variável de índice para percorrer a string
+    int contador = 0;   // Contador de vogais encontradas
+
+    // Solicita a palavra ao usuário
+    printf("Digite uma palavra: ");
+    fgets(palavra, sizeof(palavra), stdin);  // Lê a string (aceita espaços e inclui '\n')
+
+    // Solicita o caractere substituto
+    printf("Digite um caractere para substituir as vogais: ");
+    scanf(" %c", &substituto);  // Lê um único caractere, ignorando espaços anteriores
+
+    // Percorre a string até o final ('\0')
+    while (palavra[i] != '\0')
+    {
+        // Verifica se o caractere atual é uma vogal (maiúscula ou minúscula)
+        if (palavra[i] == 'a' || palavra[i] == 'e' || palavra[i] == 'i' || palavra[i] == 'o' || palavra[i] == 'u' ||
+            palavra[i] == 'A' || palavra[i] == 'E' || palavra[i] == 'I' || palavra[i] == 'O' || palavra[i] == 'U')
+        {
+            contador++;           // Incrementa o número de vogais encontradas
+            palavra[i] = substituto;  // Substitui a vogal pelo caractere informado
+        }
+        i++;  // Avança para o próximo caractere
+    }
+
+    // Exibe o resultado da contagem de vogais
+    printf("\nA palavra digitada possuia %d vogais.\n", contador);
+
+    // Exibe a palavra modificada após a substituição
+    printf("Nova palavra: %s\n", palavra);
+
+    system("pause");  // Mantém o console aberto (útil no Windows)
+    return 0;         // Finaliza o programa corretamente
+}
