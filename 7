@@ -1,0 +1,43 @@
+/*
+7. Crie um programa que compara duas strings (não use a função strcmp).
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+int main()  // Função principal
+{
+    char str1[50];  // Declara a primeira string
+    char str2[50];  // Declara a segunda string
+    int i = 0;      // Índice para percorrer as strings
+    int iguais = 1; // Variável booleana (1 = verdade, 0 = falso)
+
+    // Lê a primeira string
+    printf("Digite a primeira string: ");
+    fgets(str1, sizeof(str1), stdin);  // Usa fgets para aceitar espaços
+
+    // Lê a segunda string
+    printf("Digite a segunda string: ");
+    fgets(str2, sizeof(str2), stdin);
+
+    // Compara caractere por caractere
+    while (str1[i] != '\0' || str2[i] != '\0')  // Enquanto não chegar ao final de ambas as strings
+    {
+        if (str1[i] != str2[i])  // Se os caracteres diferirem
+        {
+            iguais = 0;  // Define que as strings são diferentes
+            break;       // Sai do laço imediatamente
+        }
+        i++;  // Avança para o próximo caractere
+    }
+
+    // Exibe o resultado da comparação
+    if (iguais == 1)
+        printf("\nAs strings sao IGUAIS.\n");
+    else
+        printf("\nAs strings sao DIFERENTES.\n");
+
+    system("pause");  // Mantém o console aberto até pressionar uma tecla
+    return 0;         // Indica que o programa terminou corretamente
+}
