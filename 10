@@ -1,0 +1,40 @@
+/*
+10. Faça um programa que receba uma palavra e a imprima de trás-para-frente.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+int main()  // Função principal
+{
+    char palavra[50];   // Declara uma string com até 49 caracteres + '\0'
+    int i, tamanho = 0; // Variáveis para índice e tamanho da palavra
+
+    // Solicita que o usuário digite uma palavra
+    printf("Digite uma palavra: ");
+    fgets(palavra, sizeof(palavra), stdin);  // Lê a palavra (aceita até 49 caracteres)
+
+    // Calcula o tamanho da string manualmente (sem usar strlen)
+    while (palavra[tamanho] != '\0')  // Enquanto não encontrar o fim da string
+    {
+        tamanho++;  // Conta cada caractere
+    }
+
+    // Ajusta o tamanho se fgets armazenou o caractere '\n'
+    if (palavra[tamanho - 1] == '\n')
+    {
+        palavra[tamanho - 1] = '\0';  // Substitui '\n' por '\0' para evitar erro
+        tamanho--;                    // Corrige o tamanho real da palavra
+    }
+
+    // Exibe a palavra de trás para frente
+    printf("\nPalavra invertida: ");
+    for (i = tamanho - 1; i >= 0; i--)  // Começa do último caractere até o primeiro
+    {
+        printf("%c", palavra[i]);  // Imprime caractere a caractere em ordem reversa
+    }
+
+    printf("\n");  // Quebra de linha ao final da impressão
+    system("pause");  // Mantém o console aberto até o usuário pressionar uma tecla
+    return 0;         // Finaliza o programa corretamente
+}
