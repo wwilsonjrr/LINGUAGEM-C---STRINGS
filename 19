@@ -1,0 +1,75 @@
+/*
+19. Escreva um programa que leia a idade e o primeiro nome de até 10 pessoas.
+    O programa deve terminar quando uma idade negativa for digitada.
+    Ao terminar, deve escrever o nome e a idade das pessoas mais jovens e mais velhas.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void)
+{
+    char nome[10][50];     // Vetor para armazenar até 10 nomes com 49 caracteres + '\0'
+    int idade[10];         // Vetor para armazenar as idades
+    int i = 0;             // Contador de pessoas
+    int j = 0;             // Contador auxiliar para percorrer a string
+    int maisNovo = 0;      // Índice da pessoa mais nova
+    int maisVelho = 0;     // Índice da pessoa mais velha
+
+    printf("==========================================\n");
+    printf(" CADASTRO DE NOMES E IDADES (MAX 10 PESSOAS)\n");
+    printf(" Digite idade negativa para encerrar.\n");
+    printf("==========================================\n\n");
+
+    while (i < 10) // laço externo (pessoas)
+    {
+
+        printf("Digite o nome da pessoa %d: ", i + 1);
+        fgets(nome[i], sizeof(nome[i]), stdin);
+
+        /* Remoção manual do '\n' deixado pelo fgets */
+        while (nome[i][j] != '\0') // laço interno (caracteres)
+        {
+            if (nome[i][j] == '\n')
+            {
+                nome[i][j] = '\0';
+                break;
+            }
+            j++; // Percorre até o próximo caractere
+        }
+
+        printf("Digite a idade de %s: ", nome[i]);
+        scanf("%d", &idade[i]);
+        getchar(); // consome o ENTER deixado pelo scanf
+
+        if (idade[i] < 0)
+        {
+            printf("\nIdade negativa detectada. Encerrando a entrada de dados.\n\n");
+            break;
+        }
+
+        if (idade[i] > idade[maisVelho])
+            maisVelho = i;
+
+        if (idade[i] < idade[maisNovo])
+            maisNovo = i;
+
+        i++; // Percorre até o próximo caractere
+    }
+
+    if (i > 0)
+    {
+        printf("==========================================\n");
+        printf("Pessoa mais nova: %s (%d anos)\n", nome[maisNovo], idade[maisNovo]);
+        printf("Pessoa mais velha: %s (%d anos)\n", nome[maisVelho], idade[maisVelho]);
+        printf("==========================================\n");
+    }
+    else
+    {
+        printf("Nenhum dado válido foi inserido.\n");
+    }
+
+    system("pause");
+    return 0;
+}
