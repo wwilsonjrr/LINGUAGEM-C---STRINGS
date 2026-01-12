@@ -1,117 +1,68 @@
 /*
-20. Faça um programa que preencha uma matriz de strings com os modelos de cinco carros
-    e um vetor com o consumo (km/l). Calcule e mostre:
-    (a) O modelo de carro mais econômico;
-    (b) Quantos litros cada carro consome para percorrer 1000 km.
+20. Programa que lê os modelos de 5 carros e seus consumos (km/l).
+Mostra:
+(a) o carro mais econômico;
+(b) quantos litros cada carro consome em 1000 km.
 */
 
-#include <stdio.h>    // Biblioteca padrão para entrada e saída (printf, scanf, fgets)
-#include <stdlib.h>   // Biblioteca para funções do sistema (system("pause"))
-#include <string.h>   // Biblioteca para manipulação de strings (strcspn)
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int main()  // Função principal: ponto inicial da execução do programa
+int main()
 {
-    char modelos[5][50];
-    // Matriz de strings:
-    // 5 linhas → representam 5 carros
-    // 50 colunas → até 49 caracteres para o nome + '\0'
-
-    float consumo[5];
-    // Vetor de números reais:
-    // Armazena o consumo de cada carro em km por litro (km/l)
-
-    float litros[5];
-    // Vetor de números reais:
-    // Armazena quantos litros cada carro gasta para percorrer 1000 km
-
+    char modelos[5][50];   // Nomes dos carros com 49 caracteres + '\0'
+    float consumo[5];      // Consumo em km/l
+    float litros[5];       // Litros para 1000 km
     int i;
-    // Variável contadora usada nos laços de repetição
-
-    int maisEconomico = 0;
-    // Guarda o índice do carro mais econômico
-    // Inicia com 0 (primeiro carro cadastrado)
+    int maisEconomico = 0; // Índice do carro mais econômico
 
     printf("==============================================\n");
-    printf("CADASTRO DE CONSUMO DE CARROS (5 MODELOS)\n");
+    printf("CADASTRO DE CONSUMO DE CARROS\n");
     printf("==============================================\n\n");
 
-
-    // --------------------------------------------------
-    // ETAPA 1: ENTRADA DOS DADOS
-    // --------------------------------------------------
+    // Leitura dos dados
     for (i = 0; i < 5; i++)
-    // Laço que será executado 5 vezes (uma para cada carro)
     {
         printf("Digite o modelo do carro %d: ", i + 1);
-        // Solicita ao usuário o nome do modelo do carro
-        // i + 1 é usado apenas para exibir a numeração correta (1 a 5)
-
         fgets(modelos[i], sizeof(modelos[i]), stdin);
-        // Lê uma linha inteira do teclado (aceita espaços)
-        // Armazena o texto na posição modelos[i]
 
+        // Remove o '\n' do fgets
         modelos[i][strcspn(modelos[i], "\n")] = '\0';
-        // Remove o caractere '\n' inserido pelo fgets
-        // Substitui o '\n' por '\0' para finalizar corretamente a string
 
         printf("Digite o consumo (km/l) do %s: ", modelos[i]);
-        // Solicita o consumo do carro informado
-
         scanf("%f", &consumo[i]);
-        // Lê um número real (float) digitado pelo usuário
-        // Armazena o valor na posição consumo[i]
-
-        getchar();
-        // Remove o '\n' deixado no buffer pelo scanf
-        // Evita erro na próxima leitura com fgets
-
-        printf("\n");
-        // Pula uma linha para melhorar a organização da tela
+        getchar(); // Limpa o buffer
 
         if (consumo[i] > consumo[maisEconomico])
-        // Verifica se o carro atual tem consumo maior (mais km/l)
         {
             maisEconomico = i;
-            // Atualiza o índice do carro mais econômico
         }
     }
 
-    // --------------------------------------------------
-    // ETAPA 2: CÁLCULO DO CONSUMO EM LITROS PARA 1000 KM
-    // --------------------------------------------------
+    // Cálculo dos litros para 1000 km
     for (i = 0; i < 5; i++)
-    // Laço para calcular o consumo de todos os carros
     {
-        litros[i] = 1000.0 / consumo[i];     // ************
-        // Calcula quantos litros são necessários para percorrer 1000 km
-        // Fórmula: litros = distância / consumo (km/l)
+        litros[i] = 1000.0 / consumo[i];
     }
 
-    // --------------------------------------------------
-    // ETAPA 3: SAÍDA DOS RESULTADOS
-    // --------------------------------------------------
-    printf("==============================================\n");
+    // Exibição dos resultados
+    printf("\n==============================================\n");
     printf("RESULTADOS\n");
     printf("==============================================\n");
 
     printf("\n(a) Carro mais economico: %s (%.2f km/l)\n",
            modelos[maisEconomico], consumo[maisEconomico]);
-    // Exibe o nome do carro mais econômico
-    // Mostra também o consumo com duas casas decimais
 
     printf("\n(b) Consumo para percorrer 1000 km:\n");
-    // Informa o início da lista de consumos
 
     for (i = 0; i < 5; i++)
-    // Laço para mostrar o consumo de cada carro
     {
         printf("- %s consome %.2f litros\n", modelos[i], litros[i]);
-        // Exibe o nome do carro e quantos litros ele consome em 1000 km
     }
 
     printf("==============================================\n");
 
     system("pause");
-
     return 0;
 }
