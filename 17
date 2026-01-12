@@ -1,0 +1,40 @@
+/*
+17. Leia um vetor contendo letras de uma frase, inclusive os espaços em branco.
+    Retire os espaços em branco do vetor e depois escreva o vetor resultante.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída (printf, fgets)
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+int main(void)
+{
+    char frase[100];   // Vetor que armazena até 99 caracteres + '\0'
+    char semEspaco[100]; // Vetor auxiliar para armazenar frase sem espaços
+    int i = 0, j = 0;  // 'i' percorre a frase original, 'j' controla a nova string
+
+    // Solicita que o usuário digite uma frase
+    printf("Digite uma frase: ");
+    fgets(frase, sizeof(frase), stdin);  // Lê a frase com espaços incluídos
+
+    // Percorre a frase até encontrar o caractere de fim '\0'
+    while (frase[i] != '\0')
+    {
+        // Copia apenas os caracteres que NÃO são espaços (' ')
+        if (frase[i] != ' ' && frase[i] != '\n')
+        {
+            semEspaco[j] = frase[i];  // Copia o caractere válido
+            j++;                      // Avança o índice da nova string
+        }
+
+        i++;  // Avança para o próximo caractere da string original
+    }
+
+    // Adiciona o caractere de fim de string na nova frase
+    semEspaco[j] = '\0';
+
+    // Exibe a frase sem espaços em branco
+    printf("\nFrase sem espacos em branco: %s\n", semEspaco);
+
+    system("pause");  // Pausa o programa (Windows)
+    return 0;         // Finaliza o programa corretamente
+}
