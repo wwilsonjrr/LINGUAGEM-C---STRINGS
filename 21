@@ -1,0 +1,55 @@
+/*
+21. Faça um programa que receba duas frases distintas e
+imprima de maneira invertida, trocando as letras 'A' por '*'.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <string.h>  // Biblioteca usada para funções com strings
+#include <stdlib.h>  // Biblioteca usada para system("pause")
+
+int main()
+{
+    char frase1[100], frase2[100];  // Declara duas strings (duas frases)
+    int i;  // Variável de controle para loops
+
+    // Solicita ao usuário que digite a primeira frase
+    printf("Digite a primeira frase: ");
+    fgets(frase1, sizeof(frase1), stdin); // Lê a primeira frase (aceita espaços)
+
+    // Solicita ao usuário que digite a segunda frase
+    printf("Digite a segunda frase: ");
+    fgets(frase2, sizeof(frase2), stdin); // Lê a segunda frase (aceita espaços)
+
+    // Remove o '\n' final que o fgets adiciona automaticamente, se houver
+    frase1[strcspn(frase1, "\n")] = '\0';
+    frase2[strcspn(frase2, "\n")] = '\0';
+
+    printf("\n--- Frases invertidas com 'A' trocado por '*' ---\n");
+
+    // Inverte e imprime a primeira frase
+    printf("Primeira frase invertida: ");
+    for (i = strlen(frase1) - 1; i >= 0; i--)  // Começa do final até o início
+    {
+        if (frase1[i] == 'A' || frase1[i] == 'a') // Se encontrar A ou a
+            printf("*");  // Troca por asterisco
+        else
+            printf("%c", frase1[i]);  // Caso contrário, imprime o caractere original
+    }
+
+    printf("\n"); // Pula uma linha
+
+    // Inverte e imprime a segunda frase
+    printf("Segunda frase invertida: ");
+    for (i = strlen(frase2) - 1; i >= 0; i--)  // Mesmo processo para a segunda frase
+    {
+        if (frase2[i] == 'A' || frase2[i] == 'a')
+            printf("*");
+        else
+            printf("%c", frase2[i]);
+    }
+
+    printf("\n\n");
+
+    system("pause"); // Pausa o programa no Windows para ver o resultado
+    return 0;        // Indica que o programa terminou com sucesso
+}
