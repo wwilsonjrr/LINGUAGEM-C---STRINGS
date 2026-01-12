@@ -1,0 +1,42 @@
+/*
+18. Faça um programa em que troque todas as ocorrências de uma letra L1 pela letra L2 em uma string.
+    A string e as letras L1 e L2 devem ser fornecidas pelo usuário.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+int main(void)
+{
+    char frase[100];  // Vetor para armazenar a string (até 99 caracteres + '\0')
+    char L1, L2;      // Letras que o usuário deseja trocar
+    int i = 0;        // Índice para percorrer a string
+
+    // Solicita que o usuário digite a frase
+    printf("Digite uma frase: ");
+    fgets(frase, sizeof(frase), stdin);  // Lê a string com espaços
+
+    // Solicita as letras L1 e L2
+    printf("Digite a letra que deseja substituir (L1): ");
+    scanf(" %c", &L1);  // O espaço antes de %c ignora '\n' deixado pelo fgets
+
+    printf("Digite a nova letra (L2): ");
+    scanf(" %c", &L2);
+
+    // Percorre toda a string até o caractere nulo '\0'
+    while (frase[i] != '\0')
+    {
+        // Se o caractere atual for igual a L1, substitui por L2
+        if (frase[i] == L1)
+        {
+            frase[i] = L2;
+        }
+        i++;  // Passa para o próximo caractere
+    }
+
+    // Exibe a string modificada
+    printf("\nFrase resultante: %s\n", frase);
+
+    system("pause");  // Mantém o console aberto (Windows)
+    return 0;         // Finaliza o programa corretamente
+}
