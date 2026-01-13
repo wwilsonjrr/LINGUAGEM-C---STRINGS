@@ -1,0 +1,59 @@
+/*
+24. Escreva um programa que recebe do usuário uma string S, um caractere C e uma posição I
+e devolve o índice da primeira posição da string onde foi encontrado o caractere C.
+A procura deve começar a partir da posição I.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída (printf, scanf)
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+#include <string.h>  // Biblioteca usada para manipulação de strings (strlen)
+
+int main()  // Função principal
+{
+    char S[100];   // Declara a string S com capacidade de até 99 caracteres + '\0'
+    char C;        // Declara o caractere que será procurado na string
+    int I;         // Posição inicial da busca
+    int encontrado = -1; // Variável para armazenar o índice encontrado (-1 = não encontrado)
+
+    // --- Entrada da string ---
+    printf("Digite uma string: ");
+    fgets(S, sizeof(S), stdin);        // Lê a string digitada, permitindo espaços
+
+    // Remove o '\n' (Enter) que o fgets adiciona no final
+    S[strcspn(S, "\n")]= '\0';
+
+    // --- Entrada do caractere ---
+    printf("Digite o caractere a ser procurado: ");
+    scanf(" %c", &C);   // Lê o caractere (o espaço antes de %c ignora o Enter pendente do fgets)
+
+    // --- Entrada da posição inicial ---
+    printf("Digite a posicao inicial da busca (I): ");
+    scanf("%d", &I);    // Lê a posição inicial da busca
+
+    // --- Verificação se I é válida ---
+    if (I < 0 || I >= strlen(S)) // Se a posição for menor que 0 ou maior que o tamanho da string
+    {
+        printf("Posicao inicial invalida!\n");
+    }
+    else
+    {
+        // --- Busca do caractere C na string S a partir da posição I ---
+        for (int j = I; j < strlen(S); j++) // Percorre a string a partir de I até o final
+        {
+            if (S[j] == C) // Se o caractere atual for igual ao procurado
+            {
+                encontrado = j; // Guarda o índice onde foi encontrado
+                break;          // Encerra o loop, pois já encontrou o primeiro
+            }
+        }
+
+        // --- Exibição do resultado ---
+        if (encontrado != -1) // Se o caractere foi encontrado
+            printf("O caractere '%c' foi encontrado na posicao %d.\n", C, encontrado);
+        else
+            printf("O caractere '%c' nao foi encontrado apos a posicao %d.\n", C, I);
+    }
+
+    system("pause"); // Pausa o programa (somente no Windows)
+    return 0;        // Encerra o programa com sucesso
+}
