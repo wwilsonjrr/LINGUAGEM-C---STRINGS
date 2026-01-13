@@ -1,0 +1,50 @@
+/*
+22. Ler o nome e o valor de uma determinada mercadoria de uma loja.
+Sabendo que o desconto para pagamento à vista é de 10% sobre o valor total,
+calcular o valor a ser pago à vista.
+
+Escrever o nome da mercadoria, o valor total, o valor do desconto e o valor a ser pago à vista.
+*/
+
+#include <stdio.h>   // Biblioteca padrão usada para entrada e saída de dados (printf, scanf)
+#include <stdlib.h>  // Biblioteca padrão usada para system("pause")
+#include <string.h>  // Biblioteca usada para manipulação de strings (strlen)
+
+int main()  // Função principal do programa
+{
+    char nome[50];        // Declara um vetor de caracteres (string) para armazenar o nome da mercadoria
+    float valor_total;    // Declara uma variável para armazenar o valor total da mercadoria
+    float desconto;       // Declara uma variável para armazenar o valor do desconto
+    float valor_final;    // Declara uma variável para armazenar o valor final a ser pago à vista
+
+    // --- Entrada de dados ---
+
+    printf("Digite o nome da mercadoria: "); // Exibe mensagem pedindo o nome da mercadoria
+    fgets(nome, sizeof(nome), stdin);        // Lê a linha digitada (permite espaços no nome) e armazena em 'nome'
+
+    // Remove o caractere '\n' (Enter) que o fgets armazena no final da string
+    nome[strcspn(nome, "\n")] = '\0';
+
+    // Solicita o valor total da mercadoria ao usuário
+    printf("Digite o valor total da mercadoria: R$ "); // Exibe a mensagem pedindo o valor
+    scanf("%f", &valor_total); // Lê o valor digitado (tipo float) e armazena na variável 'valor_total'
+
+    // --- Processamento dos cálculos ---
+
+    desconto = valor_total * 0.10;  // Calcula 10% do valor total (desconto à vista)
+    valor_final = valor_total - desconto;  // Subtrai o desconto do valor total para obter o valor final
+
+    // --- Saída dos resultados ---
+
+    printf("\n--- RESUMO DA COMPRA ---\n"); // Imprime um cabeçalho para organizar a saída
+
+    printf("Mercadoria: %s\n", nome);              // Imprime o nome da mercadoria
+    printf("Valor total: R$ %.2f\n", valor_total); // Imprime o valor total com duas casas decimais
+    printf("Desconto (10%%): R$ %.2f\n", desconto);// Imprime o valor do desconto (%% imprime o símbolo %)
+    printf("Valor a pagar à vista: R$ %.2f\n", valor_final); // Imprime o valor final com o desconto aplicado
+
+    printf("\n"); // Pula uma linha para deixar o visual mais limpo
+
+    system("pause"); // Pausa o programa (apenas no Windows) para o usuário ver os resultados antes de fechar
+    return 0;        // Retorna 0, indicando que o programa terminou com sucesso
+}
