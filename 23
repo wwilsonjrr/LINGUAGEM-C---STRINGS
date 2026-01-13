@@ -1,0 +1,67 @@
+/*
+23. Escreva um programa que receba uma string S e inteiros não-negativos I e J
+e imprima o segmento S[I..J].
+
+Digite uma string: Ola mundo!  <---- strlen (10 caracteres)
+Digite o valor de I (inicio): 3
+Digite o valor de J (fim): 9   <--- como j < strlen(S)
+Segmento S[3..9]:  mundo!
+
+Digite uma string: Ola mundo!   <---- strlen (10 caracteres)
+Digite o valor de I (inicio): 1
+Digite o valor de J (fim): 10  <---- j >= strlen (S)
+Intervalo invalido!
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída (printf, scanf)
+#include <stdlib.h>  // Biblioteca padrão (usada aqui para system("pause"))
+#include <string.h>  // Biblioteca usada para manipulação de strings (strlen)
+
+int main()  // Função principal do programa
+{
+    char S[100];  // Declara uma string S com capacidade para até 99 caracteres + '\0' (fim de string)
+    int i, j;     // Declara duas variáveis inteiras para armazenar os índices I e J
+
+    // --- Entrada da string ---
+
+    printf("Digite uma string: ");     // Exibe mensagem pedindo que o usuário digite uma string
+    fgets(S, sizeof(S), stdin);        // Lê a string digitada, incluindo espaços (até 99 caracteres)
+
+    // Remove o '\n' (enter) que o fgets adiciona no final da string
+    S[strcspn(S, "\n")] = '\0';
+
+    // --- Entrada dos índices ---
+
+    printf("Digite o valor de I (inicio): ");  // Pede ao usuário o índice inicial do segmento
+    scanf("%d", &i);                           // Lê o valor digitado e armazena na variável i
+
+    printf("Digite o valor de J (fim): ");     // Pede ao usuário o índice final do segmento
+    scanf("%d", &j);                           // Lê o valor digitado e armazena na variável j
+
+    // --- Validação dos índices ---
+
+    // Quer dizer que se i < 0 (não pode ser negativo), j < 0 (não pode ser negativo), i > j ( o início não pode ser maior que i final),
+    // j >= strlen(S) (O último índice válido da string é strlen(S) - 1, j está tentando acessar um índice que não existe na string)
+    if (i < 0 || j < 0 || i > j || j >= strlen(S))
+    {
+        printf("Intervalo invalido!\n");  // Caso algum valor seja inválido, exibe mensagem de erro
+    }
+    else
+    {
+        // --- Impressão do segmento S[I..J] ---
+
+        printf("Segmento S[%d..%d]: ", i, j);  // Mostra quais posições estão sendo exibidas
+
+        // Loop que percorre a string do índice I até J
+        for (int k = i; k <= j; k++)
+        {
+            printf("%c", S[k]);  // Imprime o caractere correspondente à posição k
+        }
+
+        printf("\n");  // Pula uma linha após imprimir o segmento
+    }
+
+    system("pause");  // Pausa o programa (funciona apenas no Windows)
+    return 0;         // Retorna 0, indicando que o programa terminou com sucesso
+}
