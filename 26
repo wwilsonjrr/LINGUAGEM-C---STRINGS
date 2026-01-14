@@ -1,0 +1,67 @@
+/*
+26. O código de César é uma das mais simples e conhecidas técnicas de criptografia.
+É um tipo de substituição no qual cada letra do texto é substituída por outra,
+que se apresenta no alfabeto abaixo dela um número fixo de vezes.
+
+Por exemplo, com uma troca de três posições:
+'A' seria substituído por 'D', 'B' se tornaria 'E', e assim por diante.
+
+Implemente um programa que faça uso desse Código de César (3 posições),
+entre com uma string e retorne a string codificada.
+
+Exemplo:
+String: a ligeira raposa marrom saltou sobre o cachorro cansado
+Nova string: D OLJHLUD UDSRVD PDUURP VDOWRX VREUH R FDFKRUUR FDQVDGR
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída (printf, scanf, fgets)
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+#include <string.h>  // Biblioteca usada para manipulação de strings (strlen)
+#include <ctype.h>   // Biblioteca para manipular caracteres (toupper, isalpha)
+
+int main()  // Função principal
+{
+    char texto[200];  // Declara uma string para armazenar o texto digitado (até 199 caracteres)
+    int i;            // Variável de controle para o laço
+
+    // --- Entrada de dados ---
+    printf("Digite uma frase para codificar: ");
+    fgets(texto, sizeof(texto), stdin); // Lê a string com espaços (permite até 199 caracteres)
+
+    // Remove o '\n' que o fgets adiciona no final, se houver
+    texto[strcspn(texto, "\n")]= '\0';
+
+    printf("\nTexto codificado (Cifra de Cesar - deslocamento 3):\n");
+
+    // --- Processamento da codificação ---
+    for (i = 0; i < strlen(texto); i++)  // Percorre cada caractere da string
+    {
+        char c = texto[i];  // Armazena o caractere atual em 'c'
+
+        if (isalpha(c))  // Verifica se o caractere é uma letra (A-Z ou a-z)
+        {
+            c = toupper(c);  // Converte para maiúscula (como no exemplo)
+
+            // Aplica o deslocamento de 3 posições no alfabeto
+            c = ((c - 'A' + 3) % 26) + 'A';
+            /*
+               Explicação:
+               - (c - 'A') transforma o caractere em um número de 0 a 25. // Tabela ASCII: A = 65 e Z = 90  logo 90 - 65 = 25
+               - Soma 3 → desloca 3 posições à frente no alfabeto.
+               - O % 26 garante que, após 'Z', volte para 'A'.
+               - + 'A' reconverte o número em letra maiúscula.
+            */
+
+            printf("%c", c);  // Imprime a letra codificada
+        }
+        else
+        {
+            printf("%c", c);  // Se não for letra (espaço, acento, etc.), imprime igual
+        }
+    }
+
+    printf("\n\n");
+
+    system("pause");  // Pausa o programa (somente no Windows)
+    return 0;         // Indica que o programa terminou corretamente
+}
