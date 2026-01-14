@@ -1,0 +1,54 @@
+/*
+25. Escreva um programa que leia duas palavras e diga qual delas vem primeiro
+na ordem alfabética.
+Dica: 'a' é menor do que 'b'.
+*/
+
+#include <stdio.h>   // Inclui a biblioteca padrão para entrada e saída (printf, scanf)
+#include <stdlib.h>  // Inclui a biblioteca padrão (para usar system("pause"))
+#include <string.h>  // Inclui a biblioteca que contém funções para manipulação de strings (como strcmp e strlen)
+
+int main()  // Função principal do programa
+{
+    char palavra1[50];  // Declara um vetor de caracteres (string) para armazenar a primeira palavra
+    char palavra2[50];  // Declara outro vetor para armazenar a segunda palavra
+
+    // --- ENTRADA DE DADOS ---
+
+    printf("Digite a primeira palavra: ");   // Exibe uma mensagem pedindo a primeira palavra
+    fgets(palavra1, sizeof(palavra1), stdin); // Lê a primeira palavra, incluindo espaços (até 49 caracteres)
+
+    // Verifica se o último caractere da string é '\n' (Enter) e o remove
+    palavra1[strcspn(palavra1, "\n")]= '\0';
+
+    printf("Digite a segunda palavra: ");        // Exibe mensagem pedindo a segunda palavra
+    fgets(palavra2, sizeof(palavra2), stdin);    // Lê a segunda palavra digitada pelo usuário
+
+    // Verifica se o último caractere da string é '\n' (Enter) e o remove
+    palavra2[strcspn(palavra2, "\n")]= '\0';
+
+    // --- PROCESSAMENTO ---
+
+    /*
+       strcmp() compara duas strings caractere por caractere.
+       Retorna:
+       < 0 → se palavra1 vem antes de palavra2 (ordem alfabética)
+       > 0 → se palavra1 vem depois de palavra2
+       = 0 → se as duas palavras são iguais
+    */
+    int resultado = strcmp(palavra1, palavra2); // Armazena o resultado da comparação entre as duas palavras
+
+    // --- SAÍDA DE RESULTADOS ---
+
+    if (resultado < 0)  // Se o resultado for menor que 0 → palavra1 vem antes de palavra2
+        printf("A palavra '%s' vem antes de '%s' na ordem alfabetica.\n", palavra1, palavra2);
+
+    else if (resultado > 0)  // Se o resultado for maior que 0 → palavra2 vem antes de palavra1
+        printf("A palavra '%s' vem antes de '%s' na ordem alfabetica.\n", palavra2, palavra1);
+
+    else  // Se o resultado for igual a 0 → as duas palavras são idênticas
+        printf("As duas palavras sao iguais.\n");
+
+    system("pause");  // Pausa o programa (somente em Windows), aguardando o usuário apertar uma tecla
+    return 0;         // Retorna 0 indicando que o programa terminou com sucesso
+}
