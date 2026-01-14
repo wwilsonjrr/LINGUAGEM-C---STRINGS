@@ -1,0 +1,80 @@
+/*
+28. Construa um programa que leia duas strings fornecidas pelo usuário
+e verifique se a segunda string lida está contida no final da primeira,
+retornando o resultado da verificação.
+
+
+
+Quando esse strcmp retornaria 0?
+
+Somente se o restante da string for idêntico:
+
+char str1[] = "abcXYZ";
+char str2[] = "XYZ";
+
+inicio = 3;
+
+strcmp(&str1[inicio], str2) == 0; // TRUE
+
+
+
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf, fgets)
+#include <stdlib.h>  // Biblioteca padrão (para usar system("pause"))
+#include <string.h>  // Biblioteca usada para manipulação de strings (strlen, strcmp)
+
+int main()  // Função principal do programa
+{
+    char str1[100];  // Declara a primeira string (até 99 caracteres + '\0')
+    char str2[100];  // Declara a segunda string
+    int tam1, tam2;  // Variáveis para armazenar o tamanho de cada string
+    int inicio;      // Variável que armazenará a posição inicial para comparação
+
+    // --- ENTRADA DE DADOS ---
+
+    printf("Digite a primeira string: ");  // Exibe mensagem pedindo a primeira string
+    fgets(str1, sizeof(str1), stdin);      // Lê a primeira string, incluindo espaços
+
+    // Remove o '\n' final que o fgets adiciona quando o usuário pressiona Enter
+    str1[strcspn(str1, "\n")] = '\0';
+
+    printf("Digite a segunda string: ");   // Exibe mensagem pedindo a segunda string
+    fgets(str2, sizeof(str2), stdin);      // Lê a segunda string (permite espaços)
+
+    // Remove o '\n' final da segunda string, se existir
+    str2[strcspn(str2, "\n")] = '\0';
+
+    // --- PROCESSAMENTO ---
+
+    tam1 = strlen(str1);  // Calcula o tamanho da primeira string (quantos caracteres ela possui)
+    tam2 = strlen(str2);  // Calcula o tamanho da segunda string
+
+    // Verifica se a segunda string é maior que a primeira
+    if (tam2 > tam1)  // Se for maior, não pode estar contida no final da primeira
+    {
+        printf("\nA segunda string NAO pode estar contida no final da primeira (ela eh maior).\n");
+    }
+    else  // Caso contrário, realiza a verificação normal
+    {
+        // Calcula o ponto de início da comparação no final da primeira string
+        inicio = tam1 - tam2;  // Exemplo: "programacao" (11 letras) e "cao" (3 letras) → início = 8
+
+        // Compara a parte final da primeira string com a segunda
+        // A expressão &str1[inicio] cria um ponteiro que aponta para o endereço onde começa o trecho final
+        if (strcmp(&str1[inicio], str2) == 0)  // strcmp retorna 0 se as duas strings forem idênticas
+                                               // A string 2 precisa ser idêntica aos últimos caracteres da string 1, na mesma quantidade de caracteres
+                                               // Quem escolhe a str2 sou eu, essa é a chave do problema
+        {
+            printf("\nA segunda string ESTA contida no final da primeira.\n");  // Mostra que está contida
+        }
+        else
+        {
+            printf("\nA segunda string NAO esta contida no final da primeira.\n"); // Caso contrário, não está
+        }
+    }
+
+    system("pause");  // Pausa o programa (somente no Windows) para o usuário ver o resultado
+    return 0;         // Retorna 0 indicando que o programa terminou com sucesso
+}
