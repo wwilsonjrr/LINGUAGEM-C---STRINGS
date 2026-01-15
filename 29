@@ -1,0 +1,68 @@
+/*
+29. Implemente um programa que leia duas strings, str1 e str2, e um valor inteiro positivo N.
+Concatene não mais que N caracteres da string str2 à string str1 e termine str1 com '\0'.
+
+
+No seu exemplo:
+
+str1 = "Bom dia"
+
+str2 = "Vietna"
+
+N = 3
+
+
+"Bom diaVie"
+
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída (printf, scanf, fgets)
+#include <stdlib.h>  // Biblioteca padrão (usada para system("pause"))
+#include <string.h>  // Biblioteca para manipulação de strings (strlen)
+
+int main()  // Função principal do programa
+{
+    char str1[100];  // Declara a primeira string (até 99 caracteres + '\0')
+    char str2[100];  // Declara a segunda string
+    int N;           // Declara a variável que armazenará quantos caracteres serão concatenados
+    int i, j;        // Variáveis de controle para os laços
+
+    // --- ENTRADA DE DADOS ---
+
+    printf("Digite a primeira string (str1): ");  // Pede ao usuário para digitar a primeira string
+    fgets(str1, sizeof(str1), stdin);             // Lê a string com espaços (até 99 caracteres)
+
+    // Remove o '\n' (Enter) adicionado automaticamente pelo fgets
+    str1[strcspn(str1, "\n")] = '\0';
+
+    printf("Digite a segunda string (str2): ");   // Pede a segunda string
+    fgets(str2, sizeof(str2), stdin);             // Lê a segunda string
+
+    // Remove o '\n' final da segunda string, se existir
+    str2[strcspn(str2, "\n")] = '\0';
+
+    printf("Digite o valor de N (numero maximo de caracteres a concatenar): "); // Solicita o valor de N
+    scanf("%d", &N);                              // Lê o número inteiro digitado pelo usuário
+
+    // --- PROCESSAMENTO DA CONCATENAÇÃO ---
+
+    i = strlen(str1);  // Define 'i' como a posição onde a primeira string termina
+                       // Exemplo: se str1 = "Bom", então strlen(str1) = 3 → próxima posição livre é índice 3
+
+    // Laço que copia até N caracteres de str2 para o final de str1
+    for (j = 0; j < N && str2[j] != '\0'; j++)   // Executa enquanto não atingir N caracteres e o fim de str2 '\0'
+    {
+        str1[i] = str2[j];  // Copia caractere a caractere de str2 para o final de str1
+        i++;                // Avança o índice de escrita na str1
+    }
+
+    str1[i] = '\0';  // Finaliza a nova string com o caractere nulo '\0' (fim da string)  // Uma string só é considerada string se terminar com '\0'
+
+    // --- SAÍDA DE RESULTADOS ---
+
+    printf("\nString resultante apos concatenacao: %s\n", str1); // Exibe a string final já concatenada
+
+    system("pause");  // Pausa o programa (somente no Windows)
+    return 0;         // Indica que o programa terminou com sucesso
+}
