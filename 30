@@ -1,0 +1,100 @@
+/*
+30. Leia duas cadeias de caracteres A e B.
+Determine quantas vezes a cadeia A ocorre na cadeia B.
+
+
+
+    /*
+
+      B = "banana"   // tamB = 6
+      A = "ana"      // tamA = 3
+
+      Valores possíveis de i
+      i = 0 → B[0..2]
+      i = 1 → B[1..3]
+      i = 2 → B[2..4]
+      i = 3 → B[3..5]
+
+      Por isso o limite é tamB - tamA (6 - 3 = 3)
+
+      Se passasse disso, faltariam caracteres para comparar.
+
+
+
+
+      🔹 Tentativa 1 → i = 0
+
+            Compara:
+
+            j	B[i + j]	A[j]
+            0	B[0] = 'b'	A[0] = 'a' ❌
+
+            ⛔ Para aqui (break)
+
+      🔹 Tentativa 2 → i = 1
+
+            Compara:
+
+            j	B[i + j]	A[j]
+            0	B[1] = 'a'	A[0] = 'a' ✅
+            1	B[2] = 'n'	A[1] = 'n' ✅
+            2	B[3] = 'a'	A[2] = 'a' ✅
+
+            ✔️ Aqui j percorreu 0 → 1 → 2
+            ✔️ Isso é 3 comparações, não salto de índice
+
+    */
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf, scanf, fgets)
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+#include <string.h>  // Biblioteca para manipulação de strings (strlen)
+
+int main()  // Função principal do programa
+{
+    char A[50];   // Declara a string A (cadeia a ser procurada)
+    char B[200];  // Declara a string B (cadeia onde será feita a busca)
+    int i, j;     // Variáveis de controle para os laços // i = B (externo) e j = A (interno)
+    int contador = 0; // Contará quantas vezes A aparece dentro de B
+    int tamA, tamB;   // Armazenam os tamanhos de A e B
+
+    // --- ENTRADA DE DADOS ---
+
+    printf("Digite a cadeia A: ");   // Solicita a string A ao usuário
+    fgets(A, sizeof(A), stdin);      // Lê a string A (permite espaços)
+
+    // Remove o '\n' (Enter) que o fgets adiciona no final da string
+    A[strcspn(A, "\n")] = '\0';
+
+    printf("Digite a cadeia B: ");   // Solicita a string B ao usuário
+    fgets(B, sizeof(B), stdin);      // Lê a string B (permite espaços)
+
+    // Remove o '\n' final de B, se existir
+    B[strcspn(B, "\n")] = '\0';
+
+    // --- PROCESSAMENTO ---
+
+    tamA = strlen(A);  // Calcula o tamanho (quantidade de caracteres) da string A
+    tamB = strlen(B);  // Calcula o tamanho da string B
+
+    for (i = 0; i <= tamB - tamA; i++) // Laço externo: Parte de B
+    {
+        // Laço interno: compara caractere por caractere de A com uma parte de B
+        for (j = 0; j < tamA; j++)
+        {
+            if (B[i + j] != A[j])  // Se um caractere for diferente
+                break;              // Interrompe a comparação (não é uma ocorrência)
+        }
+
+        // Se o laço interno percorreu toda a string A sem interrupção
+        if (j == tamA)
+            contador++;  // Incrementa o contador de ocorrências
+    }
+
+    // --- SAÍDA DE RESULTADOS ---
+
+    printf("\nA cadeia A ocorre %d vez(es) dentro da cadeia B.\n", contador);
+    // Exibe quantas vezes A foi encontrada em B
+
+    system("pause");  // Pausa o programa (funciona apenas no Windows)
+    return 0;         // Indica que o programa terminou com sucesso
+}
